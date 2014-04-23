@@ -1,0 +1,115 @@
+//-------------------------------------//
+//  Settings
+//-------------------------------------//
+// Color
+$c-red: #FF0000;
+$c-orange: #FFA64D;
+$c-blue: #057395;
+$c-green: #56B223;
+$c-black: #333;
+
+//  Mixin
+//-------------------------------------//
+//  Clearfix
+@mixin clearfix {
+  *zoom: 1;
+  //
+  &:after {
+    content: ".";
+    display: block;
+    clear: both;
+    height: 0px;
+    visibility: hidden;
+  }
+}
+
+//  Opacity
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  $opacityIE: $opacity * 100;
+  filter: alpha(opacity=$opacityIE);
+}
+
+//  Fontsize
+@mixin fz($fz: 24, $lh: 16) {
+  font-size: ($fz / $baseFontSize)* 1em;
+  $lh_num : ($lh / $fz)* 1;
+  $lh_round : round-decimal($lh_num, 3);
+  line-height: #{$lh_round};
+}
+
+//  Fontsize
+@mixin fzp($fz: 24, $lh: 16) {
+  font-size: #{$fz}px;
+  $lh_num : ($lh / $fz)* 1;
+  $lh_round : round-decimal($lh_num, 3);
+  line-height: #{$lh_round};
+}
+
+
+//-------------------------------------
+// Sprite
+//-------------------------------------
+
+@mixin sprite-box-size($map-item, $map, $device-pixel-ratio: 2) {
+  $_width:  round(image-width(sprite-file($map, $map-item)) / $device-pixel-ratio);
+  $_height: round(image-height(sprite-file($map, $map-item)) / $device-pixel-ratio);
+  width: $_width;
+  height: $_height;
+}
+
+@mixin sprite-background-position($map-item, $map, $device-pixel-ratio: 2) {
+  $position-x: round(nth(sprite-position($map, $map-item), 1) / $device-pixel-ratio);
+  $position-y: round(nth(sprite-position($map, $map-item), 2) / $device-pixel-ratio);
+  background-position: $position-x $position-y;
+}
+
+@mixin sprite-background-image($map, $map-image) {
+  background: $map-image no-repeat;
+}
+
+@mixin sprite-background($map-item, $map, $map-image, $device-pixel-ratio: 2) {
+  $position-x: round(nth(sprite-position($map, $map-item), 1) / $device-pixel-ratio);
+  $position-y: round(nth(sprite-position($map, $map-item), 2) / $device-pixel-ratio);
+  background: $map-image no-repeat $position-x $position-y;
+}
+
+@mixin sprite-background-size($map, $device-pixel-ratio: 2) {
+  $background-size-width:   round(image-width(sprite-path($map)) / $device-pixel-ratio);
+  $background-size-height: round(image-height(sprite-path($map)) / $device-pixel-ratio);
+  -webkit-background-size: $background-size-width $background-size-height;
+  background-size: $background-size-width $background-size-height;
+}
+
+// shortcut
+@mixin sprite($map-item, $map, $map-image, $display: inline-block, $device-pixel-ratio:2) {
+  @if $device-pixel-ratio == 1 {
+    display: $display;
+    @include sprite-box-size($map-item, $map, $device-pixel-ratio);
+    @include sprite-background($map-item, $map, $map-image, $device-pixel-ratio);
+  } @else {
+    display: $display;
+    @include sprite-box-size($map-item, $map, $device-pixel-ratio);
+    @include sprite-background($map-item, $map, $map-image, $device-pixel-ratio);
+    @include sprite-background-size($map, $device-pixel-ratio);
+  }
+}
+
+// $sprites-all: sprite-map("all/**/*.png", $layout: smart);
+// $sprites-all-image: sprite-url($sprites-all);
+//
+//
+// $sprites-2x: sprite-map("2x/**/*.png", $layout: smart);
+// $sprites-2x-image: sprite-url($sprites-2x);
+
+
+
+// retina用書き方
+// @include sprite('画像名', $sprites-all, $sprites-all-image, $device-pixel-ratio:2);
+//
+// 等倍サイズの書き方
+// @include sprite('画像名', $sprites-all, $sprites-all-image, $device-pixel-ratio:1);
+//
+//
+//$sprites-2x: sprite-map("sprite/retina/*.png", $layout: horizontal);
+//$sprites-2x-image: sprite-url($sprites-2x);

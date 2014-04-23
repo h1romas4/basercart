@@ -1,0 +1,85 @@
+// terkel.jp/archives/2012/12/decimal-digits-and-rounding-sass-function
+
+// Round number to specified digits
+// @function round-decimal
+// @param    {Number} $number number to round
+// @param    {Number} $digits digits to output
+// @return   {Number} rounded number
+// @example
+//     round-decimal(0.333)    => 0
+//     round-decimal(0.333, 1) => 0.3
+//     round-decimal(0.333, 2) => 0.33
+//     round-decimal(0.666)    => 1
+//     round-decimal(0.666, 1) => 0.7
+//     round-decimal(0.666, 2) => 0.67
+@function round-decimal ($number, $digits: 0) {
+    @return to-fixed($number, $digits, 'round');
+}
+
+// Ceil number to specified digits
+// @function ceil-decimal
+// @param    {Number} $number number to ceil
+// @param    {Number} $digits digits to output
+// @return   {Number} ceiled number
+// @example
+//     ceil-decimal(0.333)    => 1
+//     ceil-decimal(0.333, 1) => 0.4
+//     ceil-decimal(0.333, 2) => 0.34
+//     ceil-decimal(0.666)    => 1
+//     ceil-decimal(0.666, 1) => 0.7
+//     ceil-decimal(0.666, 2) => 0.67
+@function ceil-decimal ($number, $digits: 0) {
+    @return to-fixed($number, $digits, 'ceil');
+}
+
+// Floor number to specified digits
+// @function floor-decimal
+// @param    {Number} $number number to floor
+// @param    {Number} $digits digits to output
+// @return   {Number} floored number
+// @example
+//     floor-decimal(0.333)    => 0
+//     floor-decimal(0.333, 1) => 0.3
+//     floor-decimal(0.333, 2) => 0.33
+//     floor-decimal(0.666)    => 0
+//     floor-decimal(0.666, 1) => 0.6
+//     floor-decimal(0.666, 2) => 0.66
+@function floor-decimal ($number, $digits: 0) {
+    @return to-fixed($number, $digits, 'floor');
+}
+
+// Round, ceil or floor number to specified digits
+// @function to-fixed
+// @param    {Number} $number number to round
+// @param    {Number} $digits digits to output
+// @param    {String} $round how to round number: 'round' (default), 'ceil' or 'floor'
+// @return   {Number} rounded number
+@function to-fixed ($number, $digits: 0, $round: 'round') {
+    $n: 1;
+    // $number must be a number
+    @if type-of($number) != number {
+        @warn '#{ $number } is not a number.';
+        @return $number;
+    }
+    // $digits must be a unitless number
+    @if type-of($digits) != number {
+        @warn '#{ $digits } is not a number.';
+        @return $number;
+    } @else if not unitless($digits) {
+        @warn '#{ $digits } has a unit.';
+        @return $number;
+    }
+    @for $i from 1 through $digits {
+        $n: $n * 10;
+    }
+    @if $round == 'round' {
+        @return round($number * $n) / $n;
+    } @else if $round == 'ceil' {
+        @return ceil($number * $n) / $n;
+    } @else if $round == 'floor' {
+        @return floor($number * $n) / $n;
+    } @else {
+        @warn '#{ $round } is undefined keyword.';
+        @return $number;
+    }
+}

@@ -1,0 +1,12 @@
+# Eclipse ignore
+.settings/
+.buildpath
+.project
+
+# gradle ignore
+.gradle/
+.sass-cache/
+
+# baserCMS ignore
+Pages/*
+!Pages/empty
