@@ -12,6 +12,18 @@ Documentation
 - See [受賞者発表!! | 第２回 baserCMS デザインテーマコンテスト](http://contest.basercms.net/)
 - See [baserCMS ショッピングカートコンセプトテーマ baserCart](http://another.maple4ever.net/archives/2048/)
 
+Development
+-------------
+
+ 1. Download and setup [baserCMS](http://basercms.net/).
+ 2. `cd app/webroot/theme`
+ 3. `git clone https://github.com/h1romas4/basercart.git`
+ 4. Enable basercart in baserCMS administrator, and initialize theme data.
+ 5. `cd basercart`
+ 6. `./gradlew watch` or `.\gradlew.bat watch` (_source/sass/*.sass auto compile)
+
+enjoy.
+
 baserCMS
 ==========
 Based Website Development Project  
