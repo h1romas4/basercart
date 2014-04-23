@@ -1,0 +1,6 @@
+baserCart : baserCMS Theme
+Copyright 2014, こもりこめろましゃ. <http://komorikomasha.info/>
+
+About License
+Licensed under the MIT License
+http://opensource.org/licenses/mit-license.php
