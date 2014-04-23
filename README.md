@@ -2,6 +2,8 @@ basercart
 =========
 Shopping cart for baserCMS
 
+<img src="http://another.maple4ever.net/wp-content/uploads/2014/04/basercart.png" alt="Screenshot"/>
+
 License
 -------
 Lincensed under the MIT lincense since version 2.0
