@@ -5,26 +5,26 @@ apply plugin: 'watch'
  * dependencies
  */
 buildscript {
-	repositories {
-		mavenCentral()
-		maven {
-			url 'http://dl.bintray.com/robfletcher/gradle-plugins'
-		}
-		maven {
-			url 'http://bluepapa32.github.io/maven/'
-		}
-	}
-	dependencies {
-		classpath 'org.gradle.plugins:gradle-compass:1.0.7'
-		classpath 'com.bluepapa32.gradle.plugins:gradle-watch-plugin:0.1.0'
-	}
+    repositories {
+        mavenCentral()
+        maven {
+            url 'http://dl.bintray.com/robfletcher/gradle-plugins'
+        }
+        maven {
+            url 'http://bluepapa32.github.io/maven/'
+        }
+    }
+    dependencies {
+        classpath 'org.gradle.plugins:gradle-compass:1.0.7'
+        classpath 'com.bluepapa32.gradle.plugins:gradle-watch-plugin:0.1.0'
+    }
 }
 
 /**
  * repositories
  */
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 /**
@@ -34,25 +34,25 @@ compass {
     outputStyle = "expanded"
     noLineComments = true
     debugInfo = false
-	cssDir = file('css')
-	sassDir = file('_source/sass')
+    cssDir = file('css')
+    sassDir = file('_source/sass')
 }
 
 /**
  * watch
  */
 watch {
-	sass {
-		files files('_source/sass')
-		tasks 'compileSass'
-	}
+    sass {
+        files files('_source/sass')
+        tasks 'compileSass'
+    }
 }
 
 /**
  * archive
  */
 archive {
-	// TODO: create zip file
+    // TODO: create zip file
 }
 
 defaultTasks 'compileSass'
