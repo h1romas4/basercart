@@ -6,7 +6,7 @@
 
 <div class="base-header">
 <header class="mod-header"><div class="mod-header-inner">
-<h1 class="mod-header-sitetitle">basercart</h1>
+<h1 class="mod-header-sitetitle"><?php $this->BcBaser->link($this->BcBaser->siteConfig['name'] , '/') ?></h1>
 <p class="mod-header-cart"><?php echo $this->BcBaser->getGoodsLink('<i class="icon-shopping-cart"></i> お買いものかご'); ?></p>
 <div class="mod-header-figure <?php if(!$this->BcBaser->hasGoods()) { echo "noitem"; } ?>">
 <div class="mod-header-basket">
